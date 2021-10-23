@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +24,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var curOrder = SizedBox(ууууууууууууу
+    var curOrder = SizedBox(
       child: Row(
         children: [
           Column(
@@ -46,7 +44,7 @@ class _MainPageState extends State<MainPage> {
 
     var shopCleaning = Container(
 
-    )
+    );
 
     var menu = BottomNavigationBar(
       items: const <BottomNavigationBarItem>[

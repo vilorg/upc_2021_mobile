@@ -15,7 +15,7 @@ class FirstState extends State<First> {
   int cur = 0;
 
   Container getFirstWindow(Color color, Color textH1, Color textH2,
-      String people, String imageBtn, String h1, String h2, int curPage) {
+      String people, String imageBtn, String h1, String h2) {
     var mainImage = SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 4 / 7,
@@ -31,7 +31,7 @@ class FirstState extends State<First> {
             h1,
             style: TextStyle(
                 color: textH1,
-                fontSize: 32,
+                fontSize: MediaQuery.of(context).size.height/24,
                 fontFamily: "Montserrat bold",
                 height: 1.2),
             textAlign: TextAlign.center,
@@ -40,7 +40,7 @@ class FirstState extends State<First> {
           Text(h2,
               style: TextStyle(
                   color: textH2,
-                  fontSize: 15,
+                  fontSize: MediaQuery.of(context).size.height/50,
                   fontFamily: "Montserrat normal",
                   fontWeight: FontWeight.bold,
                   height: 1.5),
@@ -82,8 +82,7 @@ class FirstState extends State<First> {
         "assets/images/auntBlue.png",
         "assets/images/btnWhite.png",
         "Блестящее качество",
-        "Наши клинеры - настоящие мастера своего дела, а используемые нами материалы сертифицированны и безопасны",
-        1);
+        "Наши клинеры - настоящие мастера своего дела, а используемые нами материалы сертифицированны и безопасны");
 
     var secondWindow = getFirstWindow(
         Colors.white,
@@ -92,8 +91,7 @@ class FirstState extends State<First> {
         "assets/images/uncle1.png",
         "assets/images/btnBlue.png",
         "Эко-френдли клининг",
-        "После каждой уборки мы забираем ваш мусор, сортируем его и увозим на специализированные свалки.",
-        2);
+        "После каждой уборки мы забираем ваш мусор, сортируем его и увозим на специализированные свалки.");
 
     var thirdWindow = getFirstWindow(
         Colors.white,
@@ -102,11 +100,11 @@ class FirstState extends State<First> {
         "assets/images/uncle2.png",
         "assets/images/btnOrange.png",
         "Небывалая доступность",
-        "Клининг никогда не был таким доступным. Вы можете заказывать уборку несколько раз в месяц",
-        3);
+        "Клининг никогда не был таким доступным. Вы можете заказывать уборку несколько раз в месяц");
 
     List widgets = [firstWindow, secondWindow, thirdWindow];
 
+    print(MediaQuery.of(context).size.height.toString());
     return AnimatedSwitcher(
       duration: const Duration(seconds: 1),
       child: widgets[cur],
