@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:upc_2022/main_page.dart';
 
 import 'first.dart';
 
@@ -12,8 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: CheckFirst(),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: const Color.fromRGBO(54, 86, 249, 1)),
+      home: const CheckFirst(),
     );
   }
 }
@@ -55,7 +57,7 @@ class CheckFirstState extends State<CheckFirst> {
                       prefs.setBool('isFirst', false));
                   return const First();
                 } else {
-                  return const Text("outgo");
+                  return const MainPage();
                 }
             }
           }),

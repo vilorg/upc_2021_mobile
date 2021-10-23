@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:upc_2022/test.dart';
 
+import 'main_page.dart';
+
 class First extends StatefulWidget {
   const First({Key? key}) : super(key: key);
 
@@ -70,7 +72,7 @@ class FirstState extends State<First> {
   @override
   Widget build(BuildContext context) {
     if (cur == 3) {
-      return Test();
+      return const MainPage();
     }
 
     var firstWindow = getFirstWindow(
