@@ -10,11 +10,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-  bool _selectedActual = true;
-
-  void _onOrderItemTapped() {
-    _selectedActual = !_selectedActual;
-  }
 
   void _onMenuItemTapped(int index) {
     setState(() {
@@ -24,28 +19,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var curOrder = SizedBox(
-      child: Row(
-        children: [
-          Column(
-            children: [
-              const Text("Актуальные"),
-              Container(
-                width: 100,
-                height: 10,
-                color: const Color.fromRGBO(54, 86, 249, 1),
-              ),
-              const Text("Выполненные")
-            ],
-          )
-        ],
-      ),
-    );
-
-    var shopCleaning = Container(
-
-    );
-
     var menu = BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -69,8 +42,8 @@ class _MainPageState extends State<MainPage> {
 
     return SafeArea(
         child: Scaffold(
-      body: Text("hktrgkjth"),
-      bottomNavigationBar: menu,
-    ));
+          body: Text("hktrgkjth"),
+          bottomNavigationBar: menu,
+        ));
   }
 }
