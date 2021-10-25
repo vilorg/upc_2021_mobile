@@ -12,6 +12,26 @@ class TellUs extends StatefulWidget {
 class _TellUsState extends State<TellUs> {
   Color primaryColor = const Color.fromRGBO(54, 86, 249, 1);
   Color bordColor = const Color.fromRGBO(202, 114, 33, 1);
+  Color backNotSelectedColor = const Color.fromRGBO(237, 240, 255, 1);
+
+  TextStyle textStyleBtn = const TextStyle(
+      color: Color.fromRGBO(54, 86, 249, 1),
+      fontFamily: "Montserrat bold",
+      fontSize: 18);
+
+  Container getButton(Widget widget, Color color) {
+    return Container(
+      height: 60,
+      width: 60,
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          color: color,
+          border: Border.all(color: color),
+          borderRadius: BorderRadius.circular(10)),
+      child: widget,
+      alignment: Alignment.center,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,32 +39,30 @@ class _TellUsState extends State<TellUs> {
       decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/images/room.png"),
-              fit: BoxFit.fitWidth)),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.topCenter)),
       alignment: Alignment.topCenter,
       child: Row(
         children: [
-          Container(
-              height: 60,
-              width: 60,
-              margin: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(237, 240, 255, 1.0),
-                  border: Border.all(
-                      color: const Color.fromRGBO(237, 240, 255, 1.0)),
-              borderRadius: BorderRadius.circular(20)),
-              child: Icon(Icons.arrow_back_ios_outlined, color: primaryColor)),
+          getButton(Icon(Icons.arrow_back_ios, color: primaryColor),
+              backNotSelectedColor),
           Container(
             height: 60,
-            width: 200,
+            width: MediaQuery.of(context).size.width - 120,
             margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(255, 242, 230, 1),
-                border: Border.all(
-                    color: const Color.fromRGBO(255, 242, 230, 1)),
-            borderRadius: BorderRadius.circular(20)),
+                border:
+                    Border.all(color: const Color.fromRGBO(255, 242, 230, 1)),
+                borderRadius: BorderRadius.circular(10)),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset("assets/images/price.png", height: 20,),
+                Image.asset(
+                  "assets/images/price.png",
+                  height: 20,
+                ),
+                const SizedBox(width: 20),
                 Text("Ввести промокод", style: TextStyle(color: bordColor))
               ],
             ),
@@ -53,6 +71,61 @@ class _TellUsState extends State<TellUs> {
       ),
     );
 
-    return Scaffold(body: SafeArea(child: top));
+    var text = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Расскажите о вашей квартире",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontFamily: "Montserrat medium",
+                fontWeight: FontWeight.bold,
+                fontSize: 20)),
+        SizedBox(
+            child: Column(children: [
+          const Text(
+            "Количество комнат",
+          ),
+          Center(
+              child: SizedBox(
+                  height: 80,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      getButton(
+                          Text("1", style: textStyleBtn), backNotSelectedColor),
+                      getButton(
+                          Text("2", style: textStyleBtn), backNotSelectedColor),
+                      getButton(
+                          Text("3", style: textStyleBtn), backNotSelectedColor),
+                      getButton(
+                          Text("4", style: textStyleBtn), backNotSelectedColor),
+                    ],
+                  )))
+        ])),
+        SizedBox(
+          child: Column(children: [
+            const Text("Количество комнат"),
+            SizedBox(
+                height: 80,
+                width: MediaQuery.of(context).size.width - 40,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    getButton(
+                        Text("1", style: textStyleBtn), backNotSelectedColor),
+                    getButton(
+                        Text("2", style: textStyleBtn), backNotSelectedColor),
+                    getButton(
+                        Text("3", style: textStyleBtn), backNotSelectedColor),
+                    getButton(
+                        Text("4", style: textStyleBtn), backNotSelectedColor),
+                  ],
+                ))
+          ]),
+        )
+      ],
+    );
+
+    return Scaffold(body: SafeArea(child: ListView(children: [top, text])));
   }
 }
