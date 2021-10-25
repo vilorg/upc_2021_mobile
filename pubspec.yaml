@@ -78,6 +78,9 @@ flutter:
     - family: Montserrat normal
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+    - family: Montserrat medium
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

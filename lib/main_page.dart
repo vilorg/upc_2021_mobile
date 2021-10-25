@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:upc_2022/shop_cleaning.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _MainPageState extends State<MainPage> {
 
     return SafeArea(
         child: Scaffold(
-          body: Text("hktrgkjth"),
+          body: const ShopCleaning(),
           bottomNavigationBar: menu,
         ));
   }
