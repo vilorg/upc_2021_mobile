@@ -19,10 +19,10 @@ class _TellUsState extends State<TellUs> {
       fontFamily: "Montserrat bold",
       fontSize: 18);
 
-  Container getButton(Widget widget, Color color) {
+  Container getButton(Widget widget, Color color, double size) {
     return Container(
-      height: 60,
-      width: 60,
+      height: size,
+      width: size,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: color,
@@ -35,6 +35,8 @@ class _TellUsState extends State<TellUs> {
 
   @override
   Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width / 4 - 40;
+
     var top = Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
@@ -45,7 +47,7 @@ class _TellUsState extends State<TellUs> {
       child: Row(
         children: [
           getButton(Icon(Icons.arrow_back_ios, color: primaryColor),
-              backNotSelectedColor),
+              backNotSelectedColor, 60),
           Container(
             height: 60,
             width: MediaQuery.of(context).size.width - 120,
@@ -87,18 +89,18 @@ class _TellUsState extends State<TellUs> {
           ),
           Center(
               child: SizedBox(
-                  height: 80,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+                  height: size + 20,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      getButton(
-                          Text("1", style: textStyleBtn), backNotSelectedColor),
-                      getButton(
-                          Text("2", style: textStyleBtn), backNotSelectedColor),
-                      getButton(
-                          Text("3", style: textStyleBtn), backNotSelectedColor),
-                      getButton(
-                          Text("4", style: textStyleBtn), backNotSelectedColor),
+                      getButton(Text("1", style: textStyleBtn),
+                          backNotSelectedColor, size),
+                      getButton(Text("2", style: textStyleBtn),
+                          backNotSelectedColor, size),
+                      getButton(Text("3", style: textStyleBtn),
+                          backNotSelectedColor, size),
+                      getButton(Text("4", style: textStyleBtn),
+                          backNotSelectedColor, size),
                     ],
                   )))
         ])),
@@ -106,19 +108,18 @@ class _TellUsState extends State<TellUs> {
           child: Column(children: [
             const Text("Количество комнат"),
             SizedBox(
-                height: 80,
-                width: MediaQuery.of(context).size.width - 40,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
+                height: size + 20,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    getButton(
-                        Text("1", style: textStyleBtn), backNotSelectedColor),
-                    getButton(
-                        Text("2", style: textStyleBtn), backNotSelectedColor),
-                    getButton(
-                        Text("3", style: textStyleBtn), backNotSelectedColor),
-                    getButton(
-                        Text("4", style: textStyleBtn), backNotSelectedColor),
+                    getButton(Text("1", style: textStyleBtn),
+                        backNotSelectedColor, size),
+                    getButton(Text("2", style: textStyleBtn),
+                        backNotSelectedColor, size),
+                    getButton(Text("3", style: textStyleBtn),
+                        backNotSelectedColor, size),
+                    getButton(Text("4", style: textStyleBtn),
+                        backNotSelectedColor, size),
                   ],
                 ))
           ]),
