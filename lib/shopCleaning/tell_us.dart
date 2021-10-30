@@ -38,6 +38,7 @@ class _TellUsState extends State<TellUs> {
     double size = MediaQuery.of(context).size.width / 4 - 40;
 
     var top = Container(
+      height: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/images/room.png"),
@@ -81,12 +82,19 @@ class _TellUsState extends State<TellUs> {
             style: TextStyle(
                 fontFamily: "Montserrat medium",
                 fontWeight: FontWeight.bold,
-                fontSize: 20)),
+                color: Color.fromRGBO(53, 55, 62, 1),
+                fontSize: 25)),
+        const SizedBox(
+          height: 20,
+        ),
         SizedBox(
             child: Column(children: [
           const Text(
             "Количество комнат",
+            style: TextStyle(
+                fontFamily: "Montserrat medium", fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 5),
           Center(
               child: SizedBox(
                   height: size + 20,
@@ -104,9 +112,17 @@ class _TellUsState extends State<TellUs> {
                     ],
                   )))
         ])),
+        const SizedBox(
+          height: 20,
+        ),
         SizedBox(
           child: Column(children: [
-            const Text("Количество комнат"),
+            const Text(
+              "Санузлов",
+              style: TextStyle(
+                  fontFamily: "Montserrat medium", fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 5),
             SizedBox(
                 height: size + 20,
                 child: Row(
@@ -127,6 +143,14 @@ class _TellUsState extends State<TellUs> {
       ],
     );
 
-    return Scaffold(body: SafeArea(child: ListView(children: [top, text])));
+    return Scaffold(
+        body: SafeArea(
+            child: ListView(children: [
+      top,
+      const SizedBox(
+        height: 40,
+      ),
+      text
+    ])));
   }
 }

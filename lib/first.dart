@@ -104,7 +104,6 @@ class FirstState extends State<First> {
 
     List widgets = [firstWindow, secondWindow, thirdWindow];
 
-    print(MediaQuery.of(context).size.height.toString());
     return AnimatedSwitcher(
       duration: const Duration(seconds: 1),
       child: widgets[cur],
