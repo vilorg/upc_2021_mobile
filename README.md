@@ -1,12 +1,14 @@
 # upc_2022
 
-A new Flutter project.
+Проект для отбора на Уральскую Проектную смену 2021
 
-## Getting Started
+## Добро пожаловать
+## Ссылка на демонстрацию приложения: 
+# https://youtu.be/U_k4huXKCb4
 
-This project is a starting point for a Flutter application.
+# Сам по себе apk файл найходится в build\app\outputs\flutter-apk\app-release.apk
 
-A few resources to get you started if this is your first Flutter project:
+Здесь немного дефолтной документации:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upc_2022/shopCleaning/tell_us.dart';
 
 class ShopCleaning extends StatefulWidget {
@@ -13,6 +14,79 @@ class _ShopCleaningState extends State<ShopCleaning> {
   Color primaryColor = const Color.fromRGBO(54, 86, 249, 1);
   Color notPrimaryColor = const Color.fromRGBO(147, 151, 174, 1);
   late double paddingImage, paddingShow, fontFormat;
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<bool> have;
+  late Future<int> total;
+
+  @override
+  void initState() {
+    super.initState();
+    have = _prefs.then((SharedPreferences prefs) {
+      return (prefs.getBool('have') ?? false);
+    });
+    total = _prefs.then((SharedPreferences prefs) {
+      return (prefs.getInt('total') ?? 0);
+    });
+  }
+
+  createTab(int i) {
+    return Container(
+      margin: const EdgeInsets.only(left: 40, right: 40, bottom: 300, top: 90),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black26)),
+      child: Column(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            const Text("Заказ #12331",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text("$i ₽",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+          ]),
+          const SizedBox(height: 10),
+          Text("Екатеринбург, улица крестинского, д 50, корп 1, кв. 41",
+              style: TextStyle(
+                  color: Colors.grey.shade500,
+                  fontSize: 17,
+                  fontFamily: "Montserrat medium")),
+          const SizedBox(height: 30),
+          Row(children: [
+            Row(
+              children: const [
+                Icon(Icons.lock_clock_rounded,
+                    color: Color.fromRGBO(54, 86, 249, 1), size: 50),
+                SizedBox(width: 10),
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    "Поиск клинера",
+                    style: TextStyle(
+                        color: Color.fromRGBO(54, 86, 249, 1),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
+                )
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromRGBO(237, 240, 255, 1)),
+                child: const Center(
+                    child: Text("Подробнее",
+                        style:
+                            TextStyle(color: Color.fromRGBO(54, 86, 249, 1)))))
+          ])
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +102,7 @@ class _ShopCleaningState extends State<ShopCleaning> {
       paddingShow = height / 30;
       fontFormat = 1;
     }
+
     var text = Container(
         padding: EdgeInsets.only(bottom: paddingShow),
         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -150,7 +225,40 @@ class _ShopCleaningState extends State<ShopCleaning> {
                 ],
               ),
             ),
-            body: TabBarView(children: <Widget>[shopCleaning, shopCleaning])));
+            body: TabBarView(children: <Widget>[
+              FutureBuilder<bool>(
+                  future: have,
+                  builder:
+                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return const CircularProgressIndicator();
+                      default:
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (snapshot.data == true) {
+                          return FutureBuilder(
+                              future: total,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<int> snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                  case ConnectionState.waiting:
+                                    return const CircularProgressIndicator();
+                                  default:
+                                    if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    }
+                                    return createTab(snapshot.data as int);
+                                }
+                              });
+                        }
+                    }
+                    return shopCleaning;
+                  }),
+              shopCleaning
+            ])));
 
     return selectOrder;
   }
